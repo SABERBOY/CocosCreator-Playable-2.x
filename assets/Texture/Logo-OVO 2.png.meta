@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "bf32a0dc-1a94-427e-906b-d4234da85ee0",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 526,
+  "platformSettings": {},
+  "subMetas": {
+    "Logo-OVO 2": {
+      "ver": "1.0.4",
+      "uuid": "b895c06c-3810-460f-8636-c088b616bee2",
+      "rawTextureUuid": "bf32a0dc-1a94-427e-906b-d4234da85ee0",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": -1,
+      "trimX": 5,
+      "trimY": 7,
+      "width": 469,
+      "height": 514,
+      "rawWidth": 480,
+      "rawHeight": 526,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

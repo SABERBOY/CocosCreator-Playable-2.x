@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "cbe83504-7214-45ef-a5f4-91bd2d9bdc5f",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 756,
+  "height": 224,
+  "platformSettings": {},
+  "subMetas": {
+    "Button-Cash App": {
+      "ver": "1.0.4",
+      "uuid": "b54412e9-d0f3-4806-bc58-de8fe556f4a0",
+      "rawTextureUuid": "cbe83504-7214-45ef-a5f4-91bd2d9bdc5f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -0.5,
+      "trimX": 1,
+      "trimY": 4,
+      "width": 754,
+      "height": 217,
+      "rawWidth": 756,
+      "rawHeight": 224,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

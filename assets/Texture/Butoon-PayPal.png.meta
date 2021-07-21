@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "283c3fad-6f83-4b6e-b987-90e25b9d896f",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 756,
+  "height": 216,
+  "platformSettings": {},
+  "subMetas": {
+    "Butoon-PayPal": {
+      "ver": "1.0.4",
+      "uuid": "6109d08a-7a62-4abe-98fe-67953d100651",
+      "rawTextureUuid": "283c3fad-6f83-4b6e-b987-90e25b9d896f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 754,
+      "height": 215,
+      "rawWidth": 756,
+      "rawHeight": 216,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

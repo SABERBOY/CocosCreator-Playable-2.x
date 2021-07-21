@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.5",
+  "uuid": "8b89ef82-e652-437d-85e4-b6f11d871441",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 835,
+  "height": 282,
+  "platformSettings": {},
+  "subMetas": {
+    "Logo-Cash App-2": {
+      "ver": "1.0.4",
+      "uuid": "e0268cec-35a5-49df-a0ee-6f9e982baf3e",
+      "rawTextureUuid": "8b89ef82-e652-437d-85e4-b6f11d871441",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1,
+      "offsetY": -2,
+      "trimX": 18,
+      "trimY": 54,
+      "width": 797,
+      "height": 178,
+      "rawWidth": 835,
+      "rawHeight": 282,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
