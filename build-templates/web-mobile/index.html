@@ -25,7 +25,7 @@
   <meta name="full-screen" content="yes"/>
   <meta name="x5-fullscreen" content="true"/>
   <meta name="360-fullscreen" content="true"/>
-  
+
   <!-- force screen orientation on some browser -->
   <meta name="screen-orientation" content=""/>
   <meta name="x5-orientation" content=""/>
@@ -138,7 +138,7 @@ p.footer {
     width: 50%;
     /*margin: 0 -175px;         */
     border-radius: 5px;
-    box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;           
+    box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
 }
 
 .progress-bar span {
@@ -146,17 +146,17 @@ p.footer {
     height: 100%;
     border-radius: 3px;
     box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
-    transition: width .4s ease-in-out; 
-    background-color: #34c2e3;    
+    transition: width .4s ease-in-out;
+    background-color: #34c2e3;
 }
 
 .stripes span {
     background-size: 30px 30px;
     background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
                         transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
-                        transparent 75%, transparent);            
-    
-    animation: animate-stripes 1s linear infinite;             
+                        transparent 75%, transparent);
+
+    animation: animate-stripes 1s linear infinite;
 }
 
 @keyframes animate-stripes {
@@ -168,6 +168,9 @@ p.footer {
   <script type="text/javascript" charset="utf-8">
     {$dapi$}
   </script>
+
+  <script src="{$linkJS$}"> </script>
+
 </head>
 <body>
   <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>

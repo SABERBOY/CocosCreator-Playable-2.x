@@ -159,8 +159,13 @@ run-mindworks:
 	@echo start generating unity
 	@cd ./html_generator && python ./generate_single_html.py 4
 
+run-pangle:
+	@echo start generating unity
+	@cd ./html_generator && python ./generate_single_html.py 5
+
 run:
 	@make test-game
 	@make run-iron
 	@make run-mraid
 	@make run-mindworks
+	@make run-pangle

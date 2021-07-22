@@ -79,6 +79,8 @@ function getScript(e, i) {
             };
     init();'''
 
+linkJSMatchKey = '{$linkJS$}'
+pangleLinkJS = "https://sf16-muse-va.ibytedtos.com/obj/union-fe-nc-i18n/playable/sdk/playable-sdk.js"
 fileByteList = ['.png', '.jpg', '.mp3', '.ttf', '.plist', 'txt']
 
 base64PrefixList = {
@@ -94,7 +96,8 @@ class GenerateType(Enum):
     NONE = "1",
     DAPI = "2",
     MRAID = "3",
-    MINDWORKS = "4"
+    MINDWORKS = "4",
+    Pangle = "5"
 
 
 def read_in_chunks(filePath):
@@ -153,7 +156,8 @@ def addPlistSupport(mainStr):
 def integrate(projectRootPath, ct):
     currentType = gettype(ct)
     htmlPath = projectRootPath + '/build/web-mobile/index.html'
-    newHtmlPath = './out/{}_index.html'.format(str(currentType).replace('.', '_'))
+    newHtmlPath = './out/index.html' if currentType == GenerateType.Pangle else './out/{}_index.html'.format(
+        str(currentType).replace('.', '_'))
     settingScrPath = projectRootPath + '/build/web-mobile/src/settings.js'
     mainScrPath = projectRootPath + '/build/web-mobile/main.js'
     engineScrPath = projectRootPath + '/build/web-mobile/cocos2d-js-min.js'
@@ -185,6 +189,9 @@ def integrate(projectRootPath, ct):
         htmlStr = htmlStr.replace(dapiMatchKey, dapiScipt, 1)
     else:
         htmlStr = htmlStr.replace(dapiMatchKey, "", 1)
+    if currentType == GenerateType.Pangle:
+        # 添加linkJS
+        htmlStr = htmlStr.replace(linkJSMatchKey, pangleLinkJS, 1)
 
     writeToPath(newHtmlPath, htmlStr)
 
@@ -204,6 +211,8 @@ def gettype(current_type):
         return GenerateType.MRAID
     if current_type == "4":
         return GenerateType.MINDWORKS
+    if current_type == "5":
+        return GenerateType.Pangle
     return GenerateType.NONE
 
 

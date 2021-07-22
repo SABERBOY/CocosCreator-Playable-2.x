@@ -3,6 +3,7 @@ import {Dapi} from "./Games/Dapi";
 import {Mraid} from "./Games/Mraid";
 import {Mindworks} from "./Games/Mindworks";
 import {Dummy} from "./Games/Dummy";
+import {Pangle} from "./Games/Pangle";
 
 export default class GamePlatform {
     /**@private*/
@@ -10,13 +11,15 @@ export default class GamePlatform {
     private readonly _platformSdk: IPlatform = null;
 
     constructor() {
-        console.log("GamePlatform:",this.getPlatform())
+        console.log("GamePlatform:", this.getPlatform())
         if (this.getPlatform() == EPlatform.Dapi) {
             this._platformSdk = new Dapi();
         } else if (this.getPlatform() == EPlatform.Mraid) {
             this._platformSdk = new Mraid();
         } else if (this.getPlatform() == EPlatform.Mindworks) {
             this._platformSdk = new Mindworks()
+        } else if (this.getPlatform() == EPlatform.Pangle) {
+            this._platformSdk = new Pangle()
         } else {
             this._platformSdk = new Dummy();
         }
@@ -76,6 +79,9 @@ export default class GamePlatform {
             window.hasOwnProperty("gameRetry") &&
             window.hasOwnProperty("install")) {
             return EPlatform.Mindworks
+        }
+        if (window.hasOwnProperty("openAppStore")) {
+            return EPlatform.Pangle
         }
         return EPlatform.None;
     }

@@ -26,7 +26,8 @@ export enum EPlatform {
     None = 1,
     Dapi = 2,
     Mraid = 3,
-    Mindworks = 4
+    Mindworks = 4,
+    Pangle = 5
 }
 
 export enum EAndroidOriOS {
