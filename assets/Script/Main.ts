@@ -8,6 +8,10 @@ export default class Main extends cc.Component {
     private upNode: cc.Node = null
     @property({type: cc.Node})
     private leftNode: cc.Node = null
+    @property({type: cc.Widget})
+    private gameWidget: cc.Widget = null
+    @property({type: cc.Node})
+    private bgNode: cc.Node = null
     private screenSize = null;
     private _designResolution: cc.Size;
 
@@ -18,9 +22,7 @@ export default class Main extends cc.Component {
     onReadyCallback() {
         //无需再监听此事件
         GamePlatform.instance.platformSdk.removeEventListener("ready", this.onReadyCallback);
-        let isAudioEnabled = !!GamePlatform.instance.platformSdk.getAudioVolume();
-        // console.log("isViewable:" + GamePlatform.instance.platformSdk.isViewable())
-        // console.log("getAudioVolume:" + GamePlatform.instance.platformSdk.getAudioVolume())
+        let isAudioEnabled: boolean = !!GamePlatform.instance.platformSdk.getAudioVolume();
         if (GamePlatform.instance.platformSdk.isViewable()) {
             this.adVisibleCallback({isViewable: true});
         }
@@ -40,7 +42,6 @@ export default class Main extends cc.Component {
     }
 
     adResizeCallback(event) {
-        // this.screenSize = event;
         console.log("ad was resized width " + event.width + " height " + event.height);
     }
 
@@ -65,8 +66,8 @@ export default class Main extends cc.Component {
 
     resize() {
         const frameSize = cc.view.getFrameSize();
-        cc.log(frameSize);
-        cc.log(this._designResolution);
+        // cc.log(frameSize);
+        // cc.log(this._designResolution);
         const ResolutionPolicy = cc.ResolutionPolicy;
         const designRes = this._designResolution;
         if (CC_EDITOR) {
@@ -76,11 +77,28 @@ export default class Main extends cc.Component {
                 cc.view.setDesignResolutionSize(designRes.height, designRes.width, ResolutionPolicy.FIXED_HEIGHT);
                 this.upNode.active = false
                 this.leftNode.active = true
+                this.gameWidget.left = 0.4;
+                this.scheduleOnce((): void => {
+                    const size: cc.Size = this.gameWidget.node.getContentSize();
+                    let scaleX = size.height / this.bgNode.getContentSize().height;
+                    let scaleY = size.width / this.bgNode.getContentSize().width;
+                    this.bgNode.setScale(scaleX >= scaleY ? scaleX : scaleY)
+                    console.log("PS1",this.gameWidget.node.getContentSize())
+                })
             } else {
                 cc.view.setDesignResolutionSize(designRes.width, designRes.height, ResolutionPolicy.FIXED_WIDTH);
                 this.upNode.active = true
                 this.leftNode.active = false
+                this.gameWidget.left = 0;
+                this.scheduleOnce((): void => {
+                    const size: cc.Size = this.gameWidget.node.getContentSize();
+                    let scaleX = size.height / this.bgNode.getContentSize().height;
+                    let scaleY = size.width / this.bgNode.getContentSize().width;
+                    this.bgNode.setScale(scaleX >= scaleY ? scaleX : scaleY)
+                    console.log("PS2",this.gameWidget.node.getContentSize())
+                })
             }
+
         }
         this.node.setContentSize(cc.view.getDesignResolutionSize());
     }
