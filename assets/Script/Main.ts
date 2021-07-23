@@ -4,6 +4,8 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class Main extends cc.Component {
+    /**@private*/
+    private static _ins: Main = null;
     @property({type: cc.Node})
     private upNode: cc.Node = null
     @property({type: cc.Node})
@@ -14,6 +16,20 @@ export default class Main extends cc.Component {
     private bgNode: cc.Node = null
     private screenSize = null;
     private _designResolution: cc.Size;
+
+    public static get instance(): Main {
+        return Main._ins;
+    }
+
+    private _gameEnd: boolean = false
+
+    /**
+     * 游戏是否结束
+     * @param value
+     */
+    set gameEnd(value: boolean) {
+        this._gameEnd = value;
+    }
 
     start() {
         cc.Canvas.instance.node.on(cc.Node.EventType.TOUCH_START, this.gotoStore, this);
@@ -60,8 +76,10 @@ export default class Main extends cc.Component {
     }
 
     gotoStore(event) {
-        console.log("gotoStore:", event)
-        this.userClickedDownloadButton(event)
+        if (this._gameEnd) {
+            console.log("gotoStore:", event);
+            this.userClickedDownloadButton(event)
+        }
     }
 
     resize() {
@@ -78,24 +96,26 @@ export default class Main extends cc.Component {
                 this.upNode.active = false
                 this.leftNode.active = true
                 this.gameWidget.left = 0.4;
+                this.gameWidget.updateAlignment()
                 this.scheduleOnce((): void => {
                     const size: cc.Size = this.gameWidget.node.getContentSize();
                     let scaleX = size.height / this.bgNode.getContentSize().height;
                     let scaleY = size.width / this.bgNode.getContentSize().width;
                     this.bgNode.setScale(scaleX >= scaleY ? scaleX : scaleY)
-                    console.log("PS1",this.gameWidget.node.getContentSize())
+                    // console.log("PS1",this.gameWidget.node.getContentSize())
                 })
             } else {
                 cc.view.setDesignResolutionSize(designRes.width, designRes.height, ResolutionPolicy.FIXED_WIDTH);
                 this.upNode.active = true
                 this.leftNode.active = false
                 this.gameWidget.left = 0;
+                this.gameWidget.updateAlignment()
                 this.scheduleOnce((): void => {
                     const size: cc.Size = this.gameWidget.node.getContentSize();
                     let scaleX = size.height / this.bgNode.getContentSize().height;
                     let scaleY = size.width / this.bgNode.getContentSize().width;
                     this.bgNode.setScale(scaleX >= scaleY ? scaleX : scaleY)
-                    console.log("PS2",this.gameWidget.node.getContentSize())
+                    // console.log("PS2",this.gameWidget.node.getContentSize())
                 })
             }
 
@@ -104,6 +124,7 @@ export default class Main extends cc.Component {
     }
 
     protected onLoad() {
+        Main._ins = this
         console.log("isReady:", GamePlatform.instance.platformSdk.isReady())
         if (GamePlatform.instance.platformSdk.isReady()) {
             this.onReadyCallback()

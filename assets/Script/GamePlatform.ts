@@ -1,9 +1,9 @@
 import {EAndroidOriOS, EPlatform, IPlatform} from "./Interface/IPlatform";
-import {Dapi} from "./Games/Dapi";
-import {Mraid} from "./Games/Mraid";
-import {Mindworks} from "./Games/Mindworks";
-import {Dummy} from "./Games/Dummy";
-import {Pangle} from "./Games/Pangle";
+import {Dapi} from "./GamesInterface/Dapi";
+import {Mraid} from "./GamesInterface/Mraid";
+import {Mindworks} from "./GamesInterface/Mindworks";
+import {Dummy} from "./GamesInterface/Dummy";
+import {Pangle} from "./GamesInterface/Pangle";
 
 export default class GamePlatform {
     /**@private*/
