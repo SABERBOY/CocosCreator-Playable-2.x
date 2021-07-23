@@ -51,7 +51,7 @@ export default class GameMain extends cc.Component {
     @property({type: cc.Prefab})
     private borderItem: cc.Prefab = null
 
-    private itemList: Array<Array<cc.Node>> = new Array<Array<cc.Node>>(10)
+    private itemList: Array<Array<GameItem>> = new Array<Array<GameItem>>(10)
 
     /**
      * start
@@ -62,56 +62,10 @@ export default class GameMain extends cc.Component {
     protected start(): void {
 // log.debug
         for (let i = 0; i < this.itemList.length; i++) {
-            this.itemList[i] = new Array<cc.Node>(10);
+            this.itemList[i] = new Array<GameItem>(10);
         }
-        console.log("itemList:", this.itemList)
         this.gameStart();
-
-        function findAdjacent(matrix) {
-            var x = 0, y = 0; //starting point
-            return check(x, y, matrix);
-        }
-
-        function check(x, y, matrix) {//where the recursive magic happens
-            if (matrix[x][y] == 1) {
-                checked[x][y] = 1;
-                if (x - 1 >= 0 && matrix[x - 1][y] == 1 && checked[x - 1][y] != 1) {
-                    check(x - 1, y, matrix);
-                }
-                if (y - 1 >= 0 && matrix[x][y - 1] == 1 && checked[x][y - 1] != 1) {
-                    check(x, y - 1, matrix);
-                }
-                if (x + 1 < matrix.length && matrix[x + 1][y] == 1 && checked[x + 1][y] != 1) {
-                    check(x + 1, y, matrix);
-                }
-                if (y + 1 < matrix.length && matrix[x][y + 1] == 1 && checked[x][y + 1] != 1) {
-                    check(x, y + 1, matrix);
-                }
-            }
-            return checked;
-        }
-
-        var startingMatrix = [];
-        startingMatrix[0] = [1, 2, 3, 4, 5, 6, 7, 1];
-        startingMatrix[1] = [1, 1, 3, 4, 1, 6, 1, 1];
-        startingMatrix[2] = [1, 1, 1, 1, 1, 1, 7, 1];
-        startingMatrix[3] = [5, 1, 1, 1, 5, 1, 7, 1];
-        startingMatrix[4] = [5, 2, 3, 4, 1, 1, 7, 1];
-        startingMatrix[5] = [1, 2, 1, 4, 5, 1, 1, 1];
-        startingMatrix[6] = [1, 1, 1, 1, 1, 1, 0, 1];
-        startingMatrix[7] = [1, 1, 3, 4, 4, 1, 3, 1];
-
-        var checked = []; //empty matrix for marking up checked files
-        checked[0] = [0, 0, 0, 0, 0, 0, 0, 0];
-        checked[1] = [0, 0, 0, 0, 0, 0, 0, 0];
-        checked[2] = [0, 0, 0, 0, 0, 0, 0, 0];
-        checked[3] = [0, 0, 0, 0, 0, 0, 0, 0];
-        checked[4] = [0, 0, 0, 0, 0, 0, 0, 0];
-        checked[5] = [0, 0, 0, 0, 0, 0, 0, 0];
-        checked[6] = [0, 0, 0, 0, 0, 0, 0, 0];
-        checked[7] = [0, 0, 0, 0, 0, 0, 0, 0];
-        findAdjacent(startingMatrix);
-        console.log("check:", checked)
+        console.log("itemList:", this.itemList)
     }
 
     /**
@@ -140,6 +94,15 @@ export default class GameMain extends cc.Component {
             console.log(this.itemList)
             this.gamePanelNode.once(cc.Node.EventType.TOUCH_START, (touches: cc.Event.EventTouch): void => {
                 console.log(touches)
+                const itemListTemplate: Array<Array<number>> = new Array<Array<number>>(10)
+                for (let i = 0; i < itemListTemplate.length; i++) {
+                    itemListTemplate[i] = new Array<number>(10);
+                    for (let j = 0; j < itemListTemplate[i].length; j++) {
+                        itemListTemplate[i][j] = -1
+                    }
+                }
+                this.check(3, 3, this.itemList, itemListTemplate, 4)
+                console.log("itemListTemplate:", itemListTemplate)
             })
         }, 0.5)
     }
@@ -206,29 +169,43 @@ export default class GameMain extends cc.Component {
             if (this.faceSpriteFrame[randomIndex]) {
                 gameItemConfig.face.spriteFrame = this.faceSpriteFrame[randomIndex];
             }
+            gameItemConfig.type = randomIndex;
+            this.itemList[verticalIndex][horizontalIndex] = gameItemConfig;
         }
         this.gamePanelNode.addChild(gameItem);
         gameItem.setPosition(new Vec2(startPosition.x + verticalIndex * originSize, startPosition.y - horizontalIndex * originSize))
         gameItem.active = true
         gameItem.name = `${verticalIndex}|${horizontalIndex}`
-        this.itemList[verticalIndex][horizontalIndex] = gameItem;
     }
 
-     check(x, y, matrix:Array<Array<number>>,checked:Array<Array<number>>) {
+    /**
+     * 检测
+     * @param x
+     * @param y
+     * @param matrix
+     * @param checked
+     * @param mark
+     * @private
+     */
+    private check(x: number, y: number, matrix: Array<Array<GameItem>>, checked: Array<Array<number>>, mark: number) {
         //where the recursive magic happens
-        if (matrix[x][y] == 1) {
-            checked[x][y] = 1;
-            if (x - 1 >= 0 && matrix[x - 1][y] == 1 && checked[x - 1][y] != 1) {
-                this.check(x - 1, y, matrix,checked);
+        if (matrix[x][y] && matrix[x][y].type == mark) {
+            checked[x][y] = mark;
+            //left
+            if (x - 1 >= 0 && matrix[x - 1][y].type == mark && checked[x - 1][y] != mark) {
+                this.check(x - 1, y, matrix, checked, mark);
             }
-            if (y - 1 >= 0 && matrix[x][y - 1] == 1 && checked[x][y - 1] != 1) {
-                this.check(x, y - 1, matrix,checked);
+            //up
+            if (y - 1 >= 0 && matrix[x][y - 1].type == mark && checked[x][y - 1] != mark) {
+                this.check(x, y - 1, matrix, checked, mark);
             }
-            if (x + 1 < matrix.length && matrix[x + 1][y] == 1 && checked[x + 1][y] != 1) {
-                this.check(x + 1, y, matrix,checked);
+            //right
+            if (x + 1 < matrix.length && matrix[x + 1][y].type == mark && checked[x + 1][y] != mark) {
+                this.check(x + 1, y, matrix, checked, mark);
             }
-            if (y + 1 < matrix.length && matrix[x][y + 1] == 1 && checked[x][y + 1] != 1) {
-                this.check(x, y + 1, matrix,checked);
+            //down
+            if (y + 1 < matrix.length && matrix[x][y + 1].type == mark && checked[x][y + 1] != mark) {
+                this.check(x, y + 1, matrix, checked, mark);
             }
         }
         return checked;
