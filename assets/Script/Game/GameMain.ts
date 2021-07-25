@@ -94,15 +94,23 @@ export default class GameMain extends cc.Component {
             console.log(this.itemList)
             this.gamePanelNode.once(cc.Node.EventType.TOUCH_START, (touches: cc.Event.EventTouch): void => {
                 console.log(touches)
-                const itemListTemplate: Array<Array<number>> = new Array<Array<number>>(10)
+                const itemListTemplate: number[][] = [...config.gameLists[0].data]
                 for (let i = 0; i < itemListTemplate.length; i++) {
                     itemListTemplate[i] = new Array<number>(10);
                     for (let j = 0; j < itemListTemplate[i].length; j++) {
                         itemListTemplate[i][j] = -1
                     }
                 }
-                this.check(3, 3, this.itemList, itemListTemplate, 4)
+                const mark: number = 4
+                this.check(3, 3, this.itemList, itemListTemplate, mark)
                 console.log("itemListTemplate:", itemListTemplate)
+                for (let i = 0; i < itemListTemplate.length; i++) {
+                    for (let j = 0; j < itemListTemplate[i].length; j++) {
+                        if ((itemListTemplate[i][j] == mark)) {
+                            this.itemList[i][j].node.active = false
+                        }
+                    }
+                }
             })
         }, 0.5)
     }
@@ -121,31 +129,31 @@ export default class GameMain extends cc.Component {
         if (verticalIndex === 0 && horizontalIndex === 0) {
             sprite.spriteFrame = this.borderSpriteFrame[0]
         }
-        if (verticalIndex !== 0 && verticalIndex !== 9 && horizontalIndex === 0) {
+        if (horizontalIndex !== 0 && horizontalIndex !== 9 && verticalIndex === 0) {
             sprite.spriteFrame = this.borderSpriteFrame[1]
         }
-        if (horizontalIndex === 0 && verticalIndex === 9) {
+        if (verticalIndex === 0 && horizontalIndex === 9) {
             sprite.spriteFrame = this.borderSpriteFrame[2]
         }
 
-        if (horizontalIndex !== 0 && horizontalIndex !== 9 && verticalIndex === 0) {
+        if (verticalIndex !== 0 && verticalIndex !== 9 && horizontalIndex === 0) {
             sprite.spriteFrame = this.borderSpriteFrame[3]
         }
         // sprite.spriteFrame = this.borderSpriteFrame[4] //normal
-        if (horizontalIndex !== 0 && horizontalIndex !== 9 && verticalIndex === 9) {
+        if (verticalIndex !== 0 && verticalIndex !== 9 && horizontalIndex === 9) {
             sprite.spriteFrame = this.borderSpriteFrame[5]
         }
-        if (verticalIndex === 0 && horizontalIndex === 9) {
+        if (horizontalIndex === 0 && verticalIndex === 9) {
             sprite.spriteFrame = this.borderSpriteFrame[6]
         }
-        if (verticalIndex !== 0 && verticalIndex !== 9 && horizontalIndex === 9) {
+        if (horizontalIndex !== 0 && horizontalIndex !== 9 && verticalIndex === 9) {
             sprite.spriteFrame = this.borderSpriteFrame[7]
         }
-        if (verticalIndex === 9 && horizontalIndex === 9) {
+        if (horizontalIndex === 9 && verticalIndex === 9) {
             sprite.spriteFrame = this.borderSpriteFrame[8]
         }
         this.borderPanelNode.addChild(borderItem);
-        borderItem.setPosition(new Vec2(startPosition.x + verticalIndex * originSize, startPosition.y - horizontalIndex * originSize))
+        borderItem.setPosition(new Vec2(startPosition.x + horizontalIndex * originSize, startPosition.y - verticalIndex * originSize))
         borderItem.active = true
     }
 
@@ -173,9 +181,9 @@ export default class GameMain extends cc.Component {
             this.itemList[verticalIndex][horizontalIndex] = gameItemConfig;
         }
         this.gamePanelNode.addChild(gameItem);
-        gameItem.setPosition(new Vec2(startPosition.x + verticalIndex * originSize, startPosition.y - horizontalIndex * originSize))
+        gameItem.setPosition(new Vec2(startPosition.x + horizontalIndex * originSize, startPosition.y - verticalIndex * originSize))
         gameItem.active = true
-        gameItem.name = `${verticalIndex}|${horizontalIndex}`
+        gameItem.name = `${horizontalIndex}|${verticalIndex}`
     }
 
     /**
