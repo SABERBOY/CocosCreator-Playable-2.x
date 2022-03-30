@@ -21,38 +21,40 @@ pip install simplejson
 
 ```
 
-## 可选条件
+## condition facultative
 
-需要安装make工具集，安装完成后配置环境变量，后可以批量执行Makefile文件中的命令
+Vous devez installer le jeu d'outils make.Une fois l'installation terminée, configurez les variables d'environnement, puis exécutez les commandes dans le Makefile par lots.
 
 ## copie de fichier
 
 Besoin de copier l'exemple de projet
 
 ```shell
-build-templates //文件夹
-html_generator  //文件夹
-Makefile    //文件
+build-templates //folder
+html_generator  //folder
+Makefile    //file
 ```
 
 Fichiers et dossiers correspondants au projet
 
 ## Exemple d'exécution de commande
 
+Si la variable d'environnement make est installée, ouvrez la console depuis le projet correspondant et exécutez la commande
+
 ```shell
-    // 如果安装make环境变量的话，从对应项目打开控制台，然后执行命令
     make run
 ```
 
+Si la variable d'environnement make n'est pas installée, ouvrez la console à partir du projet correspondant et entrez
+Exécutez ensuite la commande python correspondante. Le dernier paramètre correspond à ce qui suit. Généralement, il n'y a pas d'exigence particulière pour passer le paramètre correspondant.
+
 ```shell
-    //如果没有安装make环境变量，从对应项目打开控制台，进入
     cd ./html_generator
-    // 然后执行对应python命令，最后一个参数对应如下，一般无特殊需求不传入对应参数即可
-    NONE = "1",//默认
-    DAPI = "2",//DAPI平台
-    MRAID = "3",//MARID平台
-    MINDWORKS = "4",//MINDWORKS平台
-    Pangle = "5"//Pangle平台
+    NONE = "1",//NORMAL 
+    DAPI = "2",//DAPI Platform
+    MRAID = "3",//MARID Platform
+    MINDWORKS = "4",//MINDWORKS Platform
+    Pangle = "5"//Pangle    Platform
 ```
 
 ```shell
