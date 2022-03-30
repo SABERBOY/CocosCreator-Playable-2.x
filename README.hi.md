@@ -1,4 +1,4 @@
-# CocosCreator 2.4.x डेमो विज्ञापन निर्माण
+# CocosCreator 2.4.x 试玩广告制作
 
 CocosCreator 2.x डेमो विज्ञापन उत्पादन समाधान, CocosCreator 2.4.5 संस्करण का समर्थन करता है, नवीनतम संस्करण का अभी तक परीक्षण नहीं किया गया है
 
@@ -30,29 +30,31 @@ pip install simplejson
 नमूना परियोजना की प्रतिलिपि बनाने की आवश्यकता है
 
 ```shell
-build-templates //文件夹
-html_generator  //文件夹
-Makefile    //文件
+build-templates //folder
+html_generator  //folder
+Makefile    //file
 ```
 
 प्रोजेक्ट के अनुरूप फ़ाइलें और फ़ोल्डर
 
 ## कमांड निष्पादन का उदाहरण
 
+यदि मेक एनवायरनमेंट वैरिएबल स्थापित है, तो संबंधित प्रोजेक्ट से कंसोल खोलें और कमांड निष्पादित करें
+
 ```shell
-    // 如果安装make环境变量的话，从对应项目打开控制台，然后执行命令
     make run
 ```
 
+यदि मेक एनवायरनमेंट वैरिएबल स्थापित नहीं है, तो संबंधित प्रोजेक्ट से कंसोल खोलें और दर्ज करें
+फिर संबंधित पायथन कमांड को निष्पादित करें। अंतिम पैरामीटर निम्नलिखित से मेल खाता है। आम तौर पर, संबंधित पैरामीटर में पास करने के लिए कोई विशेष आवश्यकता नहीं होती है।
+
 ```shell
-    //如果没有安装make环境变量，从对应项目打开控制台，进入
     cd ./html_generator
-    // 然后执行对应python命令，最后一个参数对应如下，一般无特殊需求不传入对应参数即可
-    NONE = "1",//默认
-    DAPI = "2",//DAPI平台
-    MRAID = "3",//MARID平台
-    MINDWORKS = "4",//MINDWORKS平台
-    Pangle = "5"//Pangle平台
+    NONE = "1",//NORMAL 
+    DAPI = "2",//DAPI Platform
+    MRAID = "3",//MARID Platform
+    MINDWORKS = "4",//MINDWORKS Platform
+    Pangle = "5"//Pangle    Platform
 ```
 
 ```shell
