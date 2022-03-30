@@ -1,13 +1,13 @@
 (function () {
 
-    function boot () {
+    function boot() {
 
         var settings = window._CCSettings;
         window._CCSettings = undefined;
         var onProgress = null;
 
         let { RESOURCES, INTERNAL, MAIN, START_SCENE } = cc.AssetManager.BuiltinBundleName;
-        function setLoadingDisplay () {
+        function setLoadingDisplay() {
             // Loading splash scene
             var splash = document.getElementById('splash');
             var progressBar = splash.querySelector('.progress-bar span');
@@ -103,7 +103,7 @@
         settings.hasResourcesBundle && bundleRoot.push(RESOURCES);
 
         var count = 0;
-        function cb (err) {
+        function cb(err) {
             if (err) return console.error(err.message, err.stack);
             count++;
             if (count === bundleRoot.length + 1) {
@@ -111,7 +111,7 @@
             }
         }
 
-        cc.assetManager.loadScript(settings.jsList.map(function (x) { return 'src/' + x;}), cb);
+        cc.assetManager.loadScript(settings.jsList.map(function (x) { return 'src/' + x; }), cb);
 
         for (let i = 0; i < bundleRoot.length; i++) {
             cc.assetManager.loadBundle(bundleRoot[i], cb);
@@ -136,9 +136,9 @@
         }
 
         // Image
-        function loadDomImage (url, options, onComplete) {
+        function loadDomImage(url, options, onComplete) {
             var index = url.lastIndexOf(".");
-            var strtype= url.substr(index + 1, 4);
+            var strtype = url.substr(index + 1, 4);
             strtype = strtype.toLowerCase();
             var data = window.resMap[url];
 
@@ -148,13 +148,13 @@
                 img.crossOrigin = 'anonymous';
             }
 
-            function loadCallback () {
+            function loadCallback() {
                 img.removeEventListener('load', loadCallback);
                 img.removeEventListener('error', errorCallback);
                 onComplete && onComplete(null, img);
             }
 
-            function errorCallback () {
+            function errorCallback() {
                 img.removeEventListener('load', loadCallback);
                 img.removeEventListener('error', errorCallback);
                 onComplete && onComplete(new Error(cc.debug.getError(4930, url)));
@@ -177,8 +177,8 @@
 
         function base64toBlob(base64, type) {
             var bstr = atob(base64, type),
-            n = bstr.length,
-            u8arr = new Uint8Array(n);
+                n = bstr.length,
+                u8arr = new Uint8Array(n);
             while (n--) {
                 u8arr[n] = bstr.charCodeAt(n)
             }
@@ -189,8 +189,8 @@
 
         function base64toArray(base64) {
             var bstr = atob(base64),
-            n = bstr.length,
-            u8arr = new Uint8Array(n);
+                n = bstr.length,
+                u8arr = new Uint8Array(n);
             while (n--) {
                 u8arr[n] = bstr.charCodeAt(n)
             }
@@ -198,7 +198,7 @@
             return u8arr;
         }
 
-        function loadDomAudio (url, onComplete) {
+        function loadDomAudio(url, onComplete) {
 
             var dom = document.createElement('audio');
 
@@ -218,7 +218,7 @@
                 clearTimeout(timer);
                 dom.removeEventListener("canplaythrough", success, false);
                 dom.removeEventListener("error", failure, false);
-                if(__audioSupport.USE_LOADER_EVENT)
+                if (__audioSupport.USE_LOADER_EVENT)
                     dom.removeEventListener(__audioSupport.USE_LOADER_EVENT, success, false);
             };
 
@@ -243,7 +243,7 @@
 
             dom.addEventListener("canplaythrough", success, false);
             dom.addEventListener("error", failure, false);
-            if(__audioSupport.USE_LOADER_EVENT)
+            if (__audioSupport.USE_LOADER_EVENT)
                 dom.addEventListener(__audioSupport.USE_LOADER_EVENT, success, false);
             return dom;
         }
@@ -255,9 +255,9 @@
             data = base64toArray(data);
 
             if (data) {
-                context["decodeAudioData"](data.buffer, function(buffer){
+                context["decodeAudioData"](data.buffer, function (buffer) {
                     onComplete(null, buffer);
-                }, function(){
+                }, function () {
                     onComplete('decode error - ' + url, null);
                 });
             } else {
@@ -323,9 +323,15 @@
             onComplete(null, fontFamilyName);
         }
 
+        const downloadText =
+            (url/*: string*/, options/*: IDownloadParseOptions*/, onComplete/*: CompleteCallback*/) => {
+                console.log("downloadText:", url)
+                onComplete(null, JSON.stringify(window.resMap[url]))
+            };
 
         cc.assetManager.downloader.register('bundle', loadBundle);
         cc.assetManager.downloader.register('.json', loadJson);
+        cc.assetManager.downloader.register('.plist', downloadText);
         cc.assetManager.downloader.register('.png', loadImage);
         cc.assetManager.downloader.register('.jpg', loadImage);
         cc.assetManager.downloader.register('.jpeg', loadImage);

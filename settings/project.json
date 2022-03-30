@@ -15,7 +15,6 @@
     "PageView",
     "PageViewIndicator",
     "ProgressBar",
-    "ParticleSystem",
     "Slider",
     "ScrollBar",
     "ScrollView",
@@ -46,7 +45,7 @@
     "width": 960,
     "height": 640
   },
-  "last-module-event-record-time": 1626673615992,
+  "last-module-event-record-time": 1648648279475,
   "assets-sort-type": "name",
   "facebook": {
     "enable": false,
@@ -59,5 +58,8 @@
     }
   },
   "preview-port": 7456,
-  "clear-simulator-cache": true
+  "clear-simulator-cache": true,
+  "migrate-history": [
+    "cloud-function"
+  ]
 }

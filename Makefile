@@ -163,9 +163,14 @@ run-pangle:
 	@echo start generating unity
 	@cd ./html_generator && python ./generate_single_html.py 5
 
+run-normal:
+	@echo start generating unity
+	@cd ./html_generator && python ./generate_single_html.py 1
+
 run:
 	@make test-game
 	@make run-iron
 	@make run-mraid
 	@make run-mindworks
 	@make run-pangle
+	@make run-normal
