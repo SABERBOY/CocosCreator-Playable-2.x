@@ -22,7 +22,7 @@ if __name__ == '__main__':
     print(projectRootPath)
     print(resPath)
     argc = len(sys.argv) - 1
-    need2TinifyPic = False
+    need2TinifyPic = '1'
     if argc > 0:
         arguments = sys.argv[1:]
         need2TinifyPic = arguments[0]
