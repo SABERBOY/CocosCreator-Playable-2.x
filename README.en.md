@@ -5,7 +5,7 @@ CocosCreator 2.x demo ad production solution, supports CocosCreator 2.4.5 versio
 ## Imprint
 
 -   [English](README.en.md)
--   [简体中文](README.zh-CN.md)
+-   [Simplified Chinese](README.zh-CN.md)
 -   [traditional Chinese](README.zh-TW.md)
 -   [Hindi](README.hi.md)
 -   [French](README.fr.md)
@@ -30,29 +30,31 @@ You need to install the make toolset. After the installation is complete, config
 Need to copy the sample project
 
 ```shell
-build-templates //文件夹
-html_generator  //文件夹
-Makefile    //文件
+build-templates //folder
+html_generator  //folder
+Makefile    //file
 ```
 
 Corresponding files and folders to the project
 
 ## Example of command execution
 
+If the make environment variable is installed, open the console from the corresponding project and execute the command
+
 ```shell
-    // 如果安装make环境变量的话，从对应项目打开控制台，然后执行命令
     make run
 ```
 
+If the make environment variable is not installed, open the console from the corresponding project and enter
+Then execute the corresponding python command. The last parameter corresponds to the following. Generally, there is no special requirement to pass in the corresponding parameter.
+
 ```shell
-    //如果没有安装make环境变量，从对应项目打开控制台，进入
     cd ./html_generator
-    // 然后执行对应python命令，最后一个参数对应如下，一般无特殊需求不传入对应参数即可
-    NONE = "1",//默认
-    DAPI = "2",//DAPI平台
-    MRAID = "3",//MARID平台
-    MINDWORKS = "4",//MINDWORKS平台
-    Pangle = "5"//Pangle平台
+    NONE = "1",//NORMAL 
+    DAPI = "2",//DAPI Platform
+    MRAID = "3",//MARID Platform
+    MINDWORKS = "4",//MINDWORKS Platform
+    Pangle = "5"//Pangle    Platform
 ```
 
 ```shell
