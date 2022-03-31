@@ -23,7 +23,7 @@ pip install simplejson
 
 ## condition facultative
 
-Vous devez installer le jeu d'outils make.Une fois l'installation terminée, configurez les variables d'environnement, puis exécutez les commandes dans le Makefile par lots.
+需要安装make工具集，安装完成后配置环境变量，后可以批量执行Makefile文件中的命令
 
 ## copie de fichier
 
@@ -63,4 +63,4 @@ Exécutez ensuite la commande python correspondante. Le dernier paramètre corre
 
 ## Génération de fichiers lisibles
 
-Une fois la commande ci-dessus exécutée avec succès, le fichier d'annonce de démonstration correspondant sera généré dans le dossier "html_generator/out" du répertoire du projet.
+以上命令成功执行后，会在项目目录“html_generator/out”文件夹生成对应试玩广告文件
